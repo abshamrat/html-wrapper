@@ -1,0 +1,26 @@
+{
+  "name": "html-wrapper",
+  "version": "1.0.0",
+  "description": "wrap your html tag by anythings. It will help you to modify your large number oh html file according to your defined rules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shamrat17/html-wrapper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shamrat17/html-wrapper/issues"
+  },
+  "homepage": "https://github.com/shamrat17/html-wrapper#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "dotenv-loader": "^2.0.1",
+    "is-valid-path": "^0.1.1",
+    "lodash": "^4.17.11"
+  }
+}
