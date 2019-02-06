@@ -36,22 +36,20 @@ module.exports = {
             const html  = fs.readFileSync(process.env.SRC_DIR+fileName, process.env.ENCODING);
             const $ = await cheerio.load(html);
             if ($(lookElem).find('code').length < 1 || process.env.STRICT_WRAP === 'true') {
-                const compiled = await _.template(pattern);
-                $(lookElem).html(await compiled({html: `${$(lookElem).html()}`}));
+                // const compiled = await _.template(pattern);
+                // $(lookElem).html(await compiled({html: `${$(lookElem).html()}`}));
+                $(lookElem).wrap(pattern);
                 await saveChange(fileName, $.html());
             }
         });
     },
-    appendElements: async (elements) => {
+    appendElementsTo: async (elements, appendTo) => {
         const fileList = await getFileList(process.env.SRC_DIR);
         fileList.map(async (fileName) => {
             const html  = fs.readFileSync(process.env.SRC_DIR+fileName, process.env.ENCODING);
             const $ = await cheerio.load(html);
-            if ($(lookElem).find('code').length < 1 || process.env.STRICT_WRAP === 'true') {
-                const compiled = await _.template(pattern);
-                $(lookElem).html(await compiled({html: `${$(lookElem).html()}`}));
-                await saveChange(fileName, $.html());
-            }
+            await $(appendTo).append(elements);
+            await saveChange(fileName, $.html());
         });
     }
 
