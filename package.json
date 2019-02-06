@@ -4,7 +4,8 @@
   "description": "wrap your html tag by anythings. It will help you to modify your large number oh html file according to your defined rules",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
