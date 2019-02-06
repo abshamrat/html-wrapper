@@ -30,15 +30,18 @@ async function saveChange(fileName, content) {
 
 module.exports = {
     getFileList: getFileList,
-    wrapFilesBy: async (pattern, lookElem) => {
+    wrapFilesBy: async (pattern, lookElem, elementsToAppend, appendTo) => {
         const fileList = await getFileList(process.env.SRC_DIR);
         fileList.map(async (fileName) => {
             const html  = fs.readFileSync(process.env.SRC_DIR+fileName, process.env.ENCODING);
             const $ = await cheerio.load(html);
             if ($(lookElem).find('code').length < 1 || process.env.STRICT_WRAP === 'true') {
-                // const compiled = await _.template(pattern);
-                // $(lookElem).html(await compiled({html: `${$(lookElem).html()}`}));
-                $(lookElem).wrap(pattern);
+                await $(appendTo).append(elementsToAppend);
+                const compiled = await _.template(pattern);
+                await $(lookElem).each(async function (i, elem) {
+                    await $(this).html(await compiled({html: `${$(this).html()}`}));
+                });
+                // $(lookElem).wrap(pattern);
                 await saveChange(fileName, $.html());
             }
         });
